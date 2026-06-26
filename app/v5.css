@@ -172,7 +172,13 @@
   font-size: 1.02rem; letter-spacing: 0.01em; color: #fff; margin-bottom: 8px; }
 .v5-stat__p { position: relative; color: var(--on-dark-mut); font-size: 0.9rem; line-height: 1.5; max-width: 34ch; }
 @media (max-width: 760px) {
-  .v5-herostats { grid-template-columns: 1fr; gap: 26px; }
+  .v5-herostats { grid-template-columns: 1fr; gap: 22px; }
+  /* geisterte Zahlen sind mobil unleserlich -> klare Lime-Zahl über dem Label */
+  .v5-stat { padding-top: 16px; }
+  .v5-stat__big {
+    position: static; opacity: 1; color: var(--lime);
+    font-size: 2.5rem; line-height: 1; margin-bottom: 6px; display: block;
+  }
 }
 
 /* ---------- value cards (Copperlane) ---------- */
