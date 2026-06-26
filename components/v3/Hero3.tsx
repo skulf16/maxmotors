@@ -13,8 +13,8 @@ export default function Hero3() {
     <section className="c3-hero" id="top">
       <div className="c3-hero__media">
         <Image
-          src="/images/hero-werkstatt.jpg"
-          alt="Mechaniker bei der Arbeit am Motor in der Werkstatt"
+          src="/images/photo-10.jpg"
+          alt="Fahrzeug auf der Hebebühne in der Werkstatt von Max Motors"
           fill
           priority
           sizes="100vw"
