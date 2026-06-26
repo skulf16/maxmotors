@@ -1,85 +1,63 @@
 # Max Motors – Website
 
-Hochwertige One-Page-Website für die (fiktive) Werkstatt **Max Motors** in Berlin.
-Performance-Schmiede **und** ganz normale Werkstatt – vom Opel Corsa bis 300+ PS.
+One-Page-Website für die **Max Motors GmbH**, freie Kfz-Meisterwerkstatt in Berlin.
+Fokus: Service, Wartung und ehrliche Reparatur – alles im eigenen Haus, vom Kleinwagen
+bis zum Sportwagen. Eigener Motorenbau (Reparatur statt Versand), Lackiererei & Karosserie.
 
-Gebaut mit **Next.js 15 (App Router) + React 19 + TypeScript**, ohne CSS-Framework
-(eigenes Design-System „Prüfstand" in `app/globals.css`).
-
-## Entwürfe
-
-- **`/`** — Entwurf 1 „Prüfstand": Datenblatt-/Messprotokoll-Look, grafisch, ohne Fotos. *(nicht weiterverfolgt)*
-- **`/v2`** — Entwurf 2 „Cinematic": dunkel & edel, große echte Bildwelten, Vollbild-Hero. *(nicht weiterverfolgt)*
-- **`/v3`** — Entwurf 3 „Konfigurator": inspiriert von den Pinterest-Referenzen
-  (Jaguar / Copperlane / McLaren / KIA). Dunkler Fahrzeug-Hero mit Spec-Leiste, **Racing-Rot**,
-  helle Mission-Sektion mit geisterhaften Riesenzahlen, Tacho-/Gauge-Werte, Logo auf hellem Badge.
-- **`/v4`** — Entwurf 4 „Night Run" (**Fast & Furious Style**): Neon-Nacht (NOS-Blau + Magenta),
-  glühende schräge Headlines, Speed-Streifen, Redline-Tacho, Digital-Dashboard (Orbitron-Font),
-  Fotos im Neon-Duotone-Grade.
-- **`/v5`** — Entwurf 5 „Copperlane-Stil" (**aktuelle Richtung**): Layout nach dem Copperlane-Template
-  (eigener Code, Max-Motors-Inhalte) – Pill-Nav, **Hero-Video** (`public/max-motors-header.mp4`),
-  geticktes Kicker-Label, fette Archivo-Versal-Headlines, geisterhafte Stat-Zahlen, helle Sektionen,
-  Lime-Akzent, Value-Cards, Lime-CTA-Band. Service-Fokus.
+Gebaut mit **Next.js 15 (App Router) + React 19 + TypeScript**, ohne CSS-Framework.
 
 ## Starten
 
 ```bash
 npm install
-npm run dev      # Entwicklung → http://localhost:3000  (v2 unter /v2)
+npm run dev      # Entwicklung → http://localhost:3000
 npm run build    # Produktions-Build
 npm run start    # Produktions-Server
 ```
-
-## Bilder
-
-Echte Fotos & Logo liegen in `public/images/` bzw. `public/logo.png`.
-Die iPhone-Originale waren HEIC und wurden nach JPEG konvertiert, auf max. 2000 px
-skaliert und von fehlerhaften EXIF-Orientierungs-Tags befreit (sonst dreht der
-`next/image`-Optimizer die Bilder). Neue Fotos am besten genauso aufbereiten
-(JPEG, ohne Orientierungs-Tag).
 
 ## Aufbau
 
 ```
 app/
-  layout.tsx          Fonts (Oswald, Inter, IBM Plex Mono), SEO-Meta, JSON-LD (AutoRepair)
-  page.tsx            Reihenfolge aller Sektionen der Startseite
-  globals.css         Komplettes Design-System „Prüfstand"
-  impressum/          Pflichtseite (Platzhalter)
-  datenschutz/        Pflichtseite (Platzhalter)
+  layout.tsx          Fonts, SEO-Meta, JSON-LD (AutoRepair)
+  page.tsx            Startseite (alle Sektionen)
+  v5.css              Design-System der Startseite ("Copperlane-Stil")
+  globals.css         Basis-Styles + geteilte Komponenten (Formular, FAQ, Rechtsseiten)
+  impressum/          Pflichtseite (Platzhalter – vor Live-Gang prüfen lassen)
+  datenschutz/        Pflichtseite (Platzhalter – vor Live-Gang prüfen lassen)
 components/
-  SiteHeader.tsx      Sticky-Header + mobiles Menü
-  SiteFooter.tsx      Footer
+  v5/Header5.tsx      Pill-Navigation (sticky, mobiles Menü)
+  v5/Hero5.tsx        Hero mit Video-Hintergrund + Stat-Reihe
   Icon.tsx            Linien-Icon-Set
   Reveal.tsx          Scroll-Einblendungen
-  CountUp.tsx         Hochzählende Kennzahlen
   Faq.tsx             Akkordeon
   ContactForm.tsx     Kontaktformular (Demo, ohne Backend)
-  SectionHead.tsx     Wiederverwendbare Sektions-Überschrift
-  sections/           Einzelne Seitenabschnitte
+  SiteHeader/Footer   Header/Footer der Rechtsseiten
 lib/
   content.ts          ALLE Texte & Daten an einer Stelle
 ```
 
-## ⚠️ Vor dem Live-Gang ersetzen
+## Design
 
-Alle Inhalte sind redaktionell, aber folgende Punkte sind **Platzhalter**:
+- Heller, klarer Aufbau mit dunklen Akzent-Sektionen, **Lime-Akzent** (`#C7EE3A`).
+- Display **Archivo** (fette Versal-Headlines), Fließtext **Inter**.
+- Pill-Navigation, Hero mit Video, geticktes Kicker-Label, geisterhafte Stat-Zahlen,
+  Value-Cards, Feature-Reihen (Bild + Liste), Lime-CTA-Band.
+- Alle Texte zentral in `lib/content.ts`.
 
-1. **Kontaktdaten** in `lib/content.ts` → Objekt `site`
-   (Telefon, WhatsApp, E-Mail, Straße, PLZ, Öffnungszeiten).
-2. **Impressum & Datenschutz** (`app/impressum`, `app/datenschutz`) – mit echten
-   Firmendaten füllen und **anwaltlich/per Datenschutz-Generator prüfen lassen**
-   (Rechtsform, HRB, USt-ID, Handwerkskammer, eingesetzte Tools/Hosting).
-3. **Kontaktformular** (`components/ContactForm.tsx`) – aktuell nur Demo.
-   An ein echtes Backend (E-Mail-API / Formular-Dienst) anbinden.
-4. **Bilder**: Das Design lebt bewusst von Typo, Datenblatt-Look und Grafik statt
-   Stock-Fotos. Echte Werkstatt-/Motorsport-Fotos lassen sich später ergänzen.
-5. **Domain** in `app/layout.tsx` (`metadataBase`) anpassen.
+## Bilder & Video
 
-## Design „Prüfstand"
+- Fotos liegen in `public/images/` (eigene Werkstatt-Fotos), Logo in `public/logo.png`,
+  Hero-Video in `public/max-motors-header.mp4`.
+- iPhone-Originale waren HEIC → nach JPEG konvertiert, auf max. 2000 px skaliert und von
+  fehlerhaften EXIF-Orientierungs-Tags befreit. Neue Fotos genauso aufbereiten.
 
-- Motorblock-Schwarz `#0E0F11`, warmes Datenblatt-Weiß `#F2EDE4`,
-  ein Zündungs-Akzent `#E8521E`, kühl-metallisches `#C9CDD0`.
-- Display **Oswald**, Fließtext **Inter**, alle Messwerte **IBM Plex Mono**.
-- Leitmotiv: Label links / Wert rechts in Mono, feine Hairlines wie ein
-  Prüfstands-Messprotokoll – gleiche Sorgfalt für Corsa wie für 300-PS-Aufbau.
+## ⚠️ Vor dem Live-Gang
+
+1. **Kontaktdaten** in `lib/content.ts` → Objekt `site` (Telefon, WhatsApp, E-Mail,
+   Straße, PLZ, Öffnungszeiten) – aktuell Platzhalter.
+2. **Impressum & Datenschutz** (`app/impressum`, `app/datenschutz`) mit echten Firmendaten
+   füllen und **anwaltlich / per Datenschutz-Generator prüfen lassen**.
+3. **Kontaktformular** (`components/ContactForm.tsx`) an ein echtes Backend anbinden.
+4. **Hero-Video** komprimieren (aktuell ~16 MB) für schnellere Ladezeit.
+5. **Domain** in `app/layout.tsx` (`metadataBase`) setzen.

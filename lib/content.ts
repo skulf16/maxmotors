@@ -69,7 +69,7 @@ export const nav: { href: string; label: string }[] = [
 // SEO
 // -----------------------------------------------------------------------------
 export const meta = {
-  title: "Max Motors Berlin – Werkstatt, Motorenbau & Performance",
+  title: "Max Motors Berlin – Kfz-Werkstatt für Service, Reparatur & Lack",
   description:
     "Kfz-Meisterwerkstatt in Berlin: Service, Wartung und ehrliche Reparatur für alle Marken. Motor-Instandsetzung, Lackiererei und Karosserie – alles im eigenen Haus. 15 Hebebühnen, schnelle Termine.",
 };
