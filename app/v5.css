@@ -172,6 +172,8 @@
   font-size: 1.02rem; letter-spacing: 0.01em; color: #fff; margin-bottom: 8px; }
 .v5-stat__p { position: relative; color: var(--on-dark-mut); font-size: 0.9rem; line-height: 1.5; max-width: 34ch; }
 @media (max-width: 760px) {
+  /* Video nicht über die volle (hohe) Hero-Höhe strecken -> weniger Zoom, Auto klar erkennbar */
+  .v5-hero__video { height: 100svh; bottom: auto; }
   .v5-herostats { grid-template-columns: 1fr; gap: 22px; }
   /* geisterte Zahlen sind mobil unleserlich -> klare Lime-Zahl über dem Label */
   .v5-stat { padding-top: 16px; }
