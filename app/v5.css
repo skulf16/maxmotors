@@ -139,9 +139,9 @@
 .v5-phone { font-family: var(--font-disp); font-weight: 600; font-size: 0.86rem; color: #fff; white-space: nowrap;
   display: inline-flex; align-items: center; gap: 0.4em; }
 .v5-phone svg { color: var(--lime); }
-.v5-burger { display: none; width: 42px; height: 42px; border: 1px solid var(--line-d2); border-radius: 10px;
-  position: relative; background: transparent; }
-.v5-burger span { position: absolute; left: 11px; right: 11px; height: 1.6px; background: #fff;
+.v5-burger { display: none; width: 42px; height: 42px; border: none; border-radius: 10px;
+  position: relative; background: var(--lime); }
+.v5-burger span { position: absolute; left: 11px; right: 11px; height: 2px; background: var(--ink);
   transition: transform .3s ease, opacity .2s ease; }
 .v5-burger span:nth-child(1) { top: 15px; } .v5-burger span:nth-child(2) { top: 20px; } .v5-burger span:nth-child(3) { top: 25px; }
 .v5-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
@@ -218,7 +218,12 @@
   font-size: 1.02rem; color: #fff; margin-bottom: 6px; }
 .v5-fact__p { position: relative; color: rgba(243, 243, 241, 0.72); font-size: 0.9rem; line-height: 1.5; max-width: none; white-space: nowrap; }
 @media (max-width: 1024px) { .v5-fact__p { white-space: normal; max-width: 30ch; } }
-@media (max-width: 760px) { .v5-herofacts__in { grid-template-columns: 1fr; gap: 18px; } }
+@media (max-width: 760px) {
+  .v5-herofacts__in { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .v5-fact__big { font-size: clamp(1.9rem, 9vw, 3rem); top: -12px; }
+  .v5-fact__k { font-size: 0.8rem; }
+  .v5-fact__p { font-size: 0.7rem; line-height: 1.35; }
+}
 @media (prefers-reduced-motion: reduce) { .v5-herofacts { opacity: 1 !important; } }
 
 /* ghost stat row */
@@ -303,6 +308,8 @@
   background-attachment: fixed; }
 @media (max-width: 1024px) { #positionierung::before { background-attachment: scroll; } }
 @media (prefers-reduced-motion: reduce) { #positionierung::before { background-attachment: scroll; } }
+/* Mobile: Deko ausblenden – Text liegt sonst auf der dunklen Diagonale */
+@media (max-width: 900px) { #positionierung::before { display: none; } }
 #positionierung .v5-wrap { position: relative; z-index: 1; }
 
 /* ---------- Service: 2×2-Boxen, die beim Hover aufklappen ---------- */
@@ -507,6 +514,8 @@
     linear-gradient(112deg, transparent 0 84%, rgba(199, 238, 59, 0.16) 84%, rgba(199, 238, 59, 0.04) 96%, transparent 100%);
   background-attachment: fixed; }
 #leistungen > .v5-wrap { position: relative; z-index: 1; }
+/* Mobile: mehr Luft oben – der Overlap-CTA (-64px) sitzt sonst zu dicht am Titel */
+@media (max-width: 760px) { #leistungen { padding-top: 104px; } }
 @media (max-width: 1024px) { #leistungen::before { background-attachment: scroll; } }
 @media (prefers-reduced-motion: reduce) { #leistungen::before { background-attachment: scroll; } }
 
@@ -671,7 +680,7 @@
 .v5-funnel__opt:hover { border-color: rgba(199,238,59,0.55); }
 .v5-funnel__opt.is-sel { background: var(--lime); color: var(--ink); border-color: var(--lime); }
 .v5-funnel__nav { display: flex; gap: 12px; margin-top: 24px; }
-.v5-btn:disabled { opacity: 0.4; pointer-events: none; }
+.v5-btn:disabled { opacity: 0.7; pointer-events: none; }
 @media (max-width: 520px) { .v5-funnel__opts { grid-template-columns: 1fr; } }
 
 /* Felder im Kontakt-/Funnel-Formular: dunkel + Lime-Border */
