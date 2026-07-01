@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Oswald, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Oswald, Saira, IBM_Plex_Mono } from "next/font/google";
 import { meta, site } from "@/lib/content";
 import "./globals.css";
 
@@ -9,10 +9,10 @@ const oswald = Oswald({
   variable: "--font-oswald",
   display: "swap",
 });
-const inter = Inter({
+const sairaText = Saira({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-inter",
+  variable: "--font-saira-text",
   display: "swap",
 });
 const plexMono = IBM_Plex_Mono({
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0e0f11",
+  themeColor: "#181e2e",
   width: "device-width",
   initialScale: 1,
 };
@@ -89,7 +89,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={`${oswald.variable} ${inter.variable} ${plexMono.variable}`}>
+    <html lang="de" className={`${oswald.variable} ${sairaText.variable} ${plexMono.variable}`}>
       <body suppressHydrationWarning>
         <script
           type="application/ld+json"

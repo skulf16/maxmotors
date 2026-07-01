@@ -1,21 +1,10 @@
 import { hero } from "@/lib/content";
+import { hl } from "@/components/hl";
 
-const stats = [
-  {
-    big: "15",
-    k: "Hebebühnen",
-    p: "Hohe Kapazität, kurze Wartezeiten – Termine in Tagen, nicht Wochen.",
-  },
-  {
-    big: "100%",
-    k: "Eigenleistung",
-    p: "Motor, Lack, Karosserie und Mechanik – alles im eigenen Haus, nichts ausgelagert.",
-  },
-  {
-    big: "alle",
-    k: "Marken & Klassen",
-    p: "Vom Alltagswagen bis zum hochwertigen Fahrzeug – jedes Auto ist willkommen.",
-  },
+const facts = [
+  { big: "15", k: "Hebebühnen", p: "Modern, hohe Kapazität, kurze Wartezeiten." },
+  { big: "100%", k: "Eigenleistung", p: "Alles im eigenen Haus, nichts ausgelagert." },
+  { big: "alle", k: "Marken & Klassen", p: "Vom Alltagswagen bis zum Sportwagen." },
 ];
 
 export default function Hero5() {
@@ -33,11 +22,12 @@ export default function Hero5() {
         <source src="/max-motors-header.mp4" type="video/mp4" />
       </video>
       <div className="v5-hero__scrim" aria-hidden />
+      <div className="v5-hero__deco" aria-hidden />
 
       <div className="v5-hero__in">
-        <span className="v5-kicker">Max Motors GmbH</span>
-        <h1 className="v5-h1">{hero.headlineMain}</h1>
+        <h1 className="v5-h1">{hl(hero.headlineMain)}</h1>
         <p className="v5-hero__claim">{hero.headlineBottom}</p>
+
         <div className="v5-hero__cta">
           <a className="v5-btn" href={hero.ctaPrimary.href}>
             {hero.ctaPrimary.label}
@@ -49,16 +39,16 @@ export default function Hero5() {
         </div>
       </div>
 
-      <div className="v5-herostats">
-        {stats.map((s) => (
-          <div className="v5-stat" key={s.k}>
-            <span className="v5-stat__big" aria-hidden>
-              {s.big}
-            </span>
-            <div className="v5-stat__k">{s.k}</div>
-            <p className="v5-stat__p">{s.p}</p>
-          </div>
-        ))}
+      <div className="v5-herofacts">
+        <div className="v5-herofacts__in">
+          {facts.map((f) => (
+            <div className="v5-fact" key={f.k}>
+              <span className="v5-fact__big" aria-hidden>{f.big}</span>
+              <div className="v5-fact__k">{f.k}</div>
+              <p className="v5-fact__p">{f.p}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

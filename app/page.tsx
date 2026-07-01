@@ -1,238 +1,211 @@
-import { Archivo } from "next/font/google";
-import Image from "next/image";
+import { Saira_Condensed } from "next/font/google";
 import "./v5.css";
 
 import Header5 from "@/components/v5/Header5";
 import Hero5 from "@/components/v5/Hero5";
+import ServiceGrid from "@/components/v5/ServiceGrid";
+import IntroSlider from "@/components/v5/IntroSlider";
+import ReviewSlider from "@/components/v5/ReviewSlider";
+import LottieIcon from "@/components/v5/LottieIcon";
 import Reveal from "@/components/Reveal";
 import Icon from "@/components/Icon";
 import Faq from "@/components/Faq";
 import ContactForm from "@/components/ContactForm";
+import { hl } from "@/components/hl";
+import type { IconName } from "@/lib/content";
 
 import {
   faq,
-  kapazitaet,
   kontakt,
   leistungen,
-  lackiererei,
-  motorenbau,
+  motorsport,
   positionierung,
   site,
-  usp,
+  trustSignals,
   footer as footerData,
   nav,
 } from "@/lib/content";
 
-const archivo = Archivo({
+// Condensed Display-Schrift (Corporate)
+const saira = Saira_Condensed({
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
-  variable: "--font-archivo",
+  variable: "--font-saira",
   display: "swap",
 });
 
+// Benefits-Spalten im Intro (wie in der Referenz unten)
+const introBenefits: { icon: IconName; t: string; s: string }[] = [
+  { icon: "clock", t: "Kurzfristige Termine", s: "Termine in Tagen, nicht Wochen." },
+  { icon: "badge", t: "Gutachten & HU in House", s: "Prüfung und Gutachten unter einem Dach." },
+  { icon: "tag", t: "Teileabnahme vor Ort", s: "Eintragung direkt bei uns." },
+];
+
 export default function Home() {
   return (
-    <div className={`v5 ${archivo.variable}`}>
+    <div className={`v5 ${saira.variable}`}>
       <Header5 />
 
       <main>
         <Hero5 />
 
-        {/* ---- Mission + Value Cards ---- */}
+        {/* ---- Trust-Laufband ---- */}
+        <div className="v5-marquee" aria-hidden>
+          <div className="v5-marquee__track">
+            {[...trustSignals, ...trustSignals].map((t, i) => (
+              <span className="v5-marquee__item" key={i}>{t}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* ---- Intro / Unternehmen ---- */}
         <section className="v5-section" id="positionierung">
           <div className="v5-wrap">
-            <Reveal className="v5-mission">
-              <div>
-                <span className="v5-kicker" style={{ marginBottom: 18, display: "inline-block" }}>
-                  {positionierung.kicker}
-                </span>
-                <h2 className="v5-h2">
-                  Eine ehrliche Werkstatt, die alles im eigenen Haus macht.
-                </h2>
-              </div>
-              <div className="v5-mission__right">
-                <p className="v5-lead">{positionierung.subhead}</p>
-              </div>
-            </Reveal>
+            <div className="v5-intro">
+              <Reveal className="v5-intro__media">
+                <IntroSlider />
+                <div className="v5-intro__badge">
+                  <span className="v5-intro__badgeic" aria-hidden><Icon name="shield" size={22} /></span>
+                  <div className="n">4</div>
+                  <div className="lbl">Gewerke, ein Dach</div>
+                  <div className="sub">Motor · Lack · Karosserie · Mechanik</div>
+                </div>
+              </Reveal>
 
-            <div className="v5-cards">
-              {usp.items.map((it, i) => (
-                <Reveal className="v5-card" key={it.title} delay={i * 70}>
-                  <span className="v5-card__ic">
-                    <Icon name={it.icon} size={24} />
-                  </span>
-                  <h3 className="v5-h3">{it.title}</h3>
-                  <p>{it.text}</p>
-                </Reveal>
-              ))}
+              <Reveal className="v5-intro__copy">
+                <span className="v5-kicker">{positionierung.kicker}</span>
+                <h2 className="v5-h2">{hl("Zwei Welten, *eine Werkstatt*")}</h2>
+                <p className="v5-lead">{positionierung.lead}</p>
+
+                <div className="v5-intro__benefits">
+                  {introBenefits.map((b) => (
+                    <div className="v5-benefit" key={b.t}>
+                      <span className="v5-benefit__ic"><Icon name={b.icon} size={20} /></span>
+                      <h4 className="v5-benefit__t">{b.t}</h4>
+                      <p className="v5-benefit__s">{b.s}</p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
             </div>
           </div>
         </section>
+
+        {/* ---- Service (2x2, klappt beim Hover auf) ---- */}
+        <section className="v5-section v5-section--dark" id="service">
+          <div className="v5-wrap">
+            <Reveal className="v5-head">
+              <span className="v5-kicker">Service</span>
+              <h2 className="v5-h2">{hl("Vier Bereiche, *ein Dach*")}</h2>
+              <p className="v5-lead">Motor, Lack, Leistung und die klassische Werkstatt – alles aus einer Hand.</p>
+            </Reveal>
+            <ServiceGrid />
+          </div>
+        </section>
+
+        {/* ---- Überlappendes Termin-CTA (zwischen den Sektionen) ---- */}
+        <div className="v5-overlap">
+          <Reveal className="v5-overlap__card">
+            <div className="v5-overlap__in">
+              <h2>Ihr Auto braucht einen Termin?</h2>
+              <a className="v5-btn" href="#kontakt">
+                Termin vereinbaren
+                <span className="arr">→</span>
+              </a>
+            </div>
+          </Reveal>
+        </div>
 
         {/* ---- Services ---- */}
         <section className="v5-section v5-section--grey" id="leistungen">
           <div className="v5-wrap">
             <Reveal className="v5-head">
               <span className="v5-kicker">{leistungen.kicker}</span>
-              <h2 className="v5-h2">{leistungen.headline}</h2>
+              <h2 className="v5-h2">{hl(leistungen.headline)}</h2>
               <p className="v5-lead">{leistungen.subhead}</p>
             </Reveal>
-            <Reveal className="v5-svc">
-              {leistungen.items.map((it) => (
-                <div className="v5-svc__cell" key={it.title}>
-                  <span className="v5-svc__ic">{it.icon && <Icon name={it.icon} size={22} />}</span>
-                  <div>
-                    <h3 className="v5-h3">{it.title}</h3>
-                    <p>{it.text}</p>
-                  </div>
-                </div>
+            <div className="v5-tiles">
+              {leistungen.items.map((it, i) => (
+                <Reveal className="v5-tile" key={it.title} delay={(i % 3) * 70}>
+                  <span className="v5-tile__ic">
+                    {it.lottie ? <LottieIcon src={it.lottie} /> : it.icon && <Icon name={it.icon} size={24} />}
+                  </span>
+                  <h3 className="v5-h3">{it.title}</h3>
+                  <p>{it.text}</p>
+                </Reveal>
               ))}
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ---- Feature: Motoren-Instandsetzung ---- */}
-        <section className="v5-section" id="motorenbau">
-          <div className="v5-wrap">
-            <div className="v5-feature">
-              <Reveal className="v5-feature__media">
-                <span className="v5-feature__tag">Eigener Motorenbau</span>
-                <Image
-                  src="/images/photo-09.jpg"
-                  alt="Eigene Motoren-Bearbeitungsmaschine bei Max Motors"
-                  fill
-                  sizes="(max-width: 860px) 100vw, 50vw"
-                  quality={80}
-                />
-              </Reveal>
-              <Reveal className="v5-feature__copy">
-                <span className="v5-kicker">{motorenbau.kicker}</span>
-                <h2 className="v5-h2">{motorenbau.headline}</h2>
-                <p className="v5-lead">{motorenbau.subhead}</p>
-                <div className="v5-feature__list">
-                  {motorenbau.items.map((it, i) => (
-                    <div className="v5-feature__row" key={it.title}>
-                      <span className="n">{String(i + 1).padStart(2, "0")}</span>
-                      <div>
-                        <h4>{it.title}</h4>
-                        <p>{it.text}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="v5-feature__cta">
-                  <a className="v5-btn v5-btn--dark" href={motorenbau.cta.href}>
-                    {motorenbau.cta.label}
-                    <span className="arr">→</span>
-                  </a>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ---- Feature: Lackiererei ---- */}
-        <section className="v5-section v5-section--grey" id="lackiererei">
-          <div className="v5-wrap">
-            <div className="v5-feature v5-feature--rev">
-              <Reveal className="v5-feature__media">
-                <span className="v5-feature__tag">Eigene Lackierkabine</span>
-                <Image
-                  src="/images/photo-01.jpg"
-                  alt="Abgeklebtes Fahrzeug in der Lackierkabine"
-                  fill
-                  sizes="(max-width: 860px) 100vw, 50vw"
-                  quality={80}
-                />
-              </Reveal>
-              <Reveal className="v5-feature__copy">
-                <span className="v5-kicker">{lackiererei.kicker}</span>
-                <h2 className="v5-h2">{lackiererei.headline}</h2>
-                <p className="v5-lead">{lackiererei.subhead}</p>
-                <div className="v5-feature__list">
-                  {lackiererei.items.map((it, i) => (
-                    <div className="v5-feature__row" key={it.title}>
-                      <span className="n">{String(i + 1).padStart(2, "0")}</span>
-                      <div>
-                        <h4>{it.title}</h4>
-                        <p>{it.text}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="v5-feature__cta">
-                  <a className="v5-btn v5-btn--dark" href={lackiererei.cta.href}>
-                    {lackiererei.cta.label}
-                    <span className="arr">→</span>
-                  </a>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ---- Big dark stats band ---- */}
-        <section className="v5-section v5-section--dark" id="kapazitaet">
-          <div className="v5-wrap">
-            <Reveal className="v5-head">
-              <span className="v5-kicker">{kapazitaet.kicker}</span>
-              <h2 className="v5-h2">{kapazitaet.headline}</h2>
-              <p className="v5-lead">{kapazitaet.subhead}</p>
-            </Reveal>
-            <div className="v5-bigstats">
-              <Reveal className="v5-bigstat">
-                <div className="v5-bigstat__n">15</div>
-                <div className="v5-bigstat__k">Hebebühnen</div>
-                <p className="v5-bigstat__p">Hohe Kapazität, kurze Wartezeiten – Termine in Tagen, nicht Wochen.</p>
-              </Reveal>
-              <Reveal className="v5-bigstat" delay={80}>
-                <div className="v5-bigstat__n">100<span className="sfx">%</span></div>
-                <div className="v5-bigstat__k">Eigenleistung</div>
-                <p className="v5-bigstat__p">Motor, Lack, Karosserie und Mechanik – alles im eigenen Haus, nichts ausgelagert.</p>
-              </Reveal>
-              <Reveal className="v5-bigstat" delay={160}>
-                <div className="v5-bigstat__n">4</div>
-                <div className="v5-bigstat__k">Gewerke, ein Dach</div>
-                <p className="v5-bigstat__p">Motor, Lack, Karosserie, Mechanik – ein Ansprechpartner, ein Qualitätsanspruch.</p>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ---- FAQ ---- */}
-        <section className="v5-section v5-faq" id="faq">
-          <div className="v5-wrap">
-            <Reveal className="v5-head">
-              <span className="v5-kicker">{faq.kicker}</span>
-              <h2 className="v5-h2">{faq.headline}</h2>
-              <p className="v5-lead">{faq.subhead}</p>
-            </Reveal>
-            <Reveal>
-              <Faq items={faq.items} />
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ---- CTA band ---- */}
-        <section className="v5-section" style={{ paddingBlock: "0 clamp(70px,9vw,140px)" }}>
-          <div className="v5-wrap">
-            <Reveal className="v5-cta">
-              <div>
-                <h2>Bringen Sie Ihr Auto in gute Hände.</h2>
-                <p>
-                  Service, Reparatur oder ein größeres Anliegen? Schildern Sie uns kurz, was ansteht –
-                  wir melden uns zeitnah mit einer ehrlichen Einschätzung und einem Termin.
-                </p>
-              </div>
-              <div className="v5-cta__actions">
+              <Reveal className="v5-tile v5-tile--cta">
+                <h3 className="v5-h3">Termin nötig?</h3>
+                <p>Sagen Sie uns kurz, was ansteht – wir melden uns mit einem Vorschlag und einem Termin.</p>
                 <a className="v5-btn" href="#kontakt">
-                  Termin anfragen
+                  Termin vereinbaren
                   <span className="arr">→</span>
                 </a>
-                <a className="v5-cta__phone" href={site.phoneHref}>
-                  {site.phoneLabel}
-                </a>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ---- Motorsport (dunkel, Parallax-Hintergrund) ---- */}
+        <section className="v5-section v5-section--dark v5-motorsport" id="motorsport">
+          <div className="v5-wrap">
+            <Reveal className="v5-head">
+              <span className="v5-kicker">{motorsport.kicker}</span>
+              <h2 className="v5-h2">{hl("Vom *Rennsport* geprägt – für die Straße gemacht.")}</h2>
+              <p className="v5-lead">{motorsport.subhead}</p>
+            </Reveal>
+            <Reveal className="v5-motorsport__cta">
+              <a className="v5-btn" href={motorsport.cta.href}>
+                {motorsport.cta.label}
+                <span className="arr">→</span>
+              </a>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ---- FAQ + Google-Bewertungen (dunkel, Verlauf + Racing-Stripes) ---- */}
+        <section className="v5-section v5-section--dark v5-faq" id="faq">
+          <div className="v5-wrap">
+            <div className="v5-faqgrid">
+              <Reveal className="v5-faqgrid__left">
+                <div className="v5-gf">
+                  <span className="v5-kicker">Philosophie</span>
+                  <h2 className="v5-h2">{hl("Autos sind nicht unser Job – *sie sind unsere Leidenschaft*")}</h2>
+                  <blockquote className="v5-gf__text">
+                    <p>
+                      Als ich Max Motors aufgebaut habe, hatte ich eine einfache Idee:
+                      eine Werkstatt, in der man ehrlich sagt, was ansteht – und was nicht.
+                      Kein Fachchinesisch, keine unnötigen Rechnungen.
+                    </p>
+                    <p>
+                      Vom ersten Ölwechsel bis zum großen Motorprojekt behandeln wir jedes
+                      Auto so, als wäre es unser eigenes. Kommen Sie vorbei – wir reden Klartext.
+                    </p>
+                  </blockquote>
+                  <div className="v5-gf__author">
+                    <img className="v5-gf__photo" src="/images/photo-08.jpg" alt="Max Mustermann, Geschäftsführer" width={60} height={60} />
+                    <div className="v5-gf__meta">
+                      <span className="v5-gf__sign">Max Mustermann</span>
+                      <span className="v5-gf__role">Max Mustermann · Geschäftsführer</span>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal className="v5-faqgrid__right">
+                <Faq items={faq.items} />
+              </Reveal>
+            </div>
+
+            <Reveal className="v5-reviewsblock">
+              <div className="v5-rating">
+                <span className="v5-rating__score">4,9</span>
+                <span>
+                  <span className="v5-rating__stars" aria-hidden>★★★★★</span>
+                  <span className="v5-rating__meta">auf Google · 120+ Bewertungen</span>
+                </span>
               </div>
+              <ReviewSlider />
             </Reveal>
           </div>
         </section>
@@ -242,7 +215,7 @@ export default function Home() {
           <div className="v5-wrap">
             <Reveal className="v5-head">
               <span className="v5-kicker">{kontakt.kicker}</span>
-              <h2 className="v5-h2">{kontakt.headline}</h2>
+              <h2 className="v5-h2">{hl(kontakt.headline)}</h2>
               <p className="v5-lead">{kontakt.subhead}</p>
             </Reveal>
             <div className="v5-contact">
@@ -250,7 +223,7 @@ export default function Home() {
                 {kontakt.paragraphs.map((p, i) => (
                   <p className="v5-body" key={i}>{p}</p>
                 ))}
-                <div className="v5-info" style={{ marginTop: 24 }}>
+                <div className="v5-info">
                   <div className="v5-info__row">
                     <span className="v5-info__ic"><Icon name="phone" size={20} /></span>
                     <div>
@@ -299,9 +272,7 @@ export default function Home() {
           <div className="v5-footer__top">
             <div>
               <span className="v5-logo">
-                <span className="v5-logo__badge">
-                  <Image src="/logo.png" alt="Max Motors GmbH Logo" width={46} height={46} />
-                </span>
+                <span className="v5-logo__txt">Max Motors</span>
               </span>
               <p className="v5-footer__claim">{footerData.claim}</p>
             </div>

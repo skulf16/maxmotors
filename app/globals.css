@@ -23,7 +23,7 @@
   --radius: 3px;
 
   --font-display: var(--font-oswald), "Oswald", sans-serif;
-  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-body: var(--font-saira-text), "Saira", system-ui, sans-serif;
   --font-mono: var(--font-mono-plex), "IBM Plex Mono", ui-monospace, monospace;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);

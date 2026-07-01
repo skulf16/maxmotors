@@ -28,7 +28,7 @@ export type IconName =
   | "mail"
   | "pin";
 
-export type SpecItem = { title: string; text: string; icon?: IconName };
+export type SpecItem = { title: string; text: string; icon?: IconName; lottie?: string };
 
 // -----------------------------------------------------------------------------
 // Stammdaten / Kontakt  (PLATZHALTER – bitte ersetzen)
@@ -58,10 +58,10 @@ export const site = {
 // Navigation
 // -----------------------------------------------------------------------------
 export const nav: { href: string; label: string }[] = [
+  { href: "#service", label: "Service" },
   { href: "#leistungen", label: "Leistungen" },
-  { href: "#motorenbau", label: "Motorenbau" },
-  { href: "#lackiererei", label: "Lack & Karosserie" },
-  { href: "#kapazitaet", label: "Werkstatt" },
+  { href: "#motorsport", label: "Motorsport" },
+  { href: "#faq", label: "FAQ" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
@@ -79,10 +79,16 @@ export const meta = {
 // -----------------------------------------------------------------------------
 export const hero = {
   kicker: "Freie Meisterwerkstatt in Berlin",
-  headlineMain: "Freie Kfz-Werkstatt in Berlin für alle Fahrzeuge",
+  headlineMain: "Freie Kfz-Werkstatt in Berlin für *alle Fahrzeuge*",
   headlineTop: "Max Motors",
-  headlineBottom: "Vom ersten Check bis zum letzten Lack – alles bei Max Motors.",
+  headlineBottom: "Vom Alltagswagen über hochwertige Fahrzeuge bis zum Power-Projekt – alles unter einem Dach.",
   subhead: "Service, Wartung, Lack, Motor und Karosserie – wir erledigen alles unter einem Dach. Top Service vom Kleinwagen bis zum Sportwagen.",
+  // Drei Zielgruppen, für die die Werkstatt da ist (Hero-Tags)
+  audiences: [
+    { label: "Alltagsfahrzeuge", note: "Service, Wartung & Reparatur – alle Marken" },
+    { label: "Hochwertige Fahrzeuge", note: "Sorgfalt & Dokumentation auf Meister-Niveau" },
+    { label: "Mehr Power", note: "Motorenbau, Leistung & saubere Eintragung" },
+  ],
   paragraph:
     "Service, Wartung, Diagnose, Lackiererei, Karosserie – und sogar die Motor-Instandsetzung machen wir im eigenen Haus, statt Ihr Auto irgendwohin zu schicken. Vom Alltagswagen bis zum hochwertigen Fahrzeug bekommt jeder dieselbe gemessene Sorgfalt – zu fairen Preisen.",
   ctaPrimary: { label: "Termin anfragen", href: "#kontakt" },
@@ -132,21 +138,25 @@ export const usp = {
   items: [
     {
       icon: "engine" as IconName,
+      img: "/images/photo-09.jpg",
       title: "Motor-Instandsetzung im Haus",
       text: "Geht der Motor kaputt, reparieren wir ihn bei uns – statt ihn wochenlang einzuschicken. Vom Zylinderkopf bis zur Revision: alles vor Ort.",
     },
     {
       icon: "spray" as IconName,
+      img: "/images/photo-01.jpg",
       title: "Eigene Lackierkabine",
       text: "Karosserie, Schweißarbeiten und Lackierung laufen bei uns intern in der eigenen Kabine. Saubere Übergänge, ein Ansprechpartner, kein Hin- und Herschicken.",
     },
     {
       icon: "lift" as IconName,
+      img: "/images/photo-06.jpg",
       title: "15 Bühnen, schnelle Termine",
       text: "Großer Stützpunkt mit 15 Hebebühnen. Das heißt hohe Kapazität und Termine, auf die Sie nicht wochenlang warten – ob Ölwechsel oder große Reparatur.",
     },
     {
       icon: "shield" as IconName,
+      img: "/images/photo-03.jpg",
       title: "Service für jede Klasse",
       text: "Vom Alltagswagen bis zum hochwertigen Fahrzeug: Wartung, Service und Reparatur für alle Marken – mit dem gleichen Anspruch und ehrlicher Beratung.",
     },
@@ -194,8 +204,8 @@ export const positionierung = {
 // -----------------------------------------------------------------------------
 export const leistungen = {
   index: "03",
-  kicker: "Werkstatt-Leistungen",
-  headline: "Alles, was Ihr Auto im Alltag braucht",
+  kicker: "Reguläre Leistungen",
+  headline: "Alles, was Ihr Auto im *Alltag* braucht",
   subhead:
     "Wartung, Prüfung, Diagnose, Bremsen, Reifen und mehr – für alle Marken und Modelle. Sagen Sie uns, was ansteht, wir kümmern uns darum.",
   cta: { label: "Termin anfragen", href: "#kontakt" },
@@ -203,41 +213,49 @@ export const leistungen = {
   items: [
     {
       icon: "wrench" as IconName,
+      lottie: "/Icons/wartung-inspektion.json",
       title: "Wartung & Inspektion",
       text: "Wartung nach Herstellervorgabe, ob Kleinwagen oder Sportwagen. Alle Arbeiten dokumentiert und nachvollziehbar, damit Ihre Garantie erhalten bleibt.",
     },
     {
       icon: "badge" as IconName,
+      lottie: "/Icons/hauptuntersuchung.json",
       title: "HU / AU-Vorbereitung",
       text: "Wir machen Ihr Auto fit für die Hauptuntersuchung: prüfen, was geprüft wird, beheben Mängel vorab und stimmen den Termin direkt mit dem Prüfer ab.",
     },
     {
       icon: "diagnose" as IconName,
+      lottie: "/Icons/diagnose.json",
       title: "Diagnose & Elektronik",
       text: "Warnleuchte an, Fehler im Speicher? Wir lesen aus, messen nach und finden die Ursache, statt nur das Symptom zu löschen – auch bei moderner Sensorik.",
     },
     {
       icon: "brake" as IconName,
+      lottie: "/Icons/bremsen.json",
       title: "Bremsen & Fahrwerk",
       text: "Beläge, Scheiben, Stoßdämpfer, Lager und Achsvermessung. Damit das Auto sauber steht, sicher verzögert und ruhig auf der Straße liegt.",
     },
     {
       icon: "tire" as IconName,
+      lottie: "/Icons/reifen.json",
       title: "Reifen & Räder",
       text: "Reifenwechsel, Montage, Auswuchten und Einlagerung. Wir beraten ehrlich, welche Reifen zu Ihrem Fahrzeug und Budget passen.",
     },
     {
       icon: "snow" as IconName,
+      lottie: "/Icons/klima.json",
       title: "Klimaservice",
       text: "Klimaanlage prüfen, befüllen und desinfizieren. Lässt die Kühlung nach, finden wir das Leck, statt nur nachzufüllen.",
     },
     {
       icon: "oil" as IconName,
+      lottie: "/Icons/oel.json",
       title: "Öl- & Service",
       text: "Öl- und Filterwechsel mit den richtigen Freigaben für Ihren Motor, schnell und sauber erledigt – und ein Hinweis, wann der nächste Service fällig ist.",
     },
     {
       icon: "gauge" as IconName,
+      lottie: "/Icons/steering%20wheel.json",
       title: "Achsvermessung",
       text: "Computergestützte Achs- und Fahrwerksvermessung. Wir richten die Geometrie exakt aus – für gleichmäßigen Reifenverschleiß und sauberes Fahrverhalten.",
     },
@@ -250,7 +268,7 @@ export const leistungen = {
 export const motorenbau = {
   index: "04",
   kicker: "Motorenbau & Instandsetzung",
-  headline: "Motorschaden? Reparatur im Haus statt Versand.",
+  headline: "Motorschaden? *Reparatur im Haus* statt Versand.",
   subhead:
     "Geht etwas am Motor kaputt, setzen wir ihn bei uns vor Ort instand – statt ihn wochenlang einzuschicken. Das spart Zeit, Wege und Nerven.",
   paragraphs: [
@@ -284,10 +302,10 @@ export const motorenbau = {
 // -----------------------------------------------------------------------------
 export const performance = {
   index: "05",
-  kicker: "Performance & Tuning",
-  headline: "Mehr Leistung. Sauber abgestimmt, ehrlich eingetragen.",
+  kicker: "Tuning & Performance",
+  headline: "Mehr Leistung. *Sauber abgestimmt*, ehrlich eingetragen.",
   subhead:
-    "Von Serie bis 300+ PS – sauber abgestimmt und ehrlich eingetragen.",
+    "Jahrelange Motorsport-Erfahrung und ein eigenes Renn-Team – von Serie bis 300+ PS, sauber abgestimmt und ehrlich eingetragen.",
   paragraphs: [
     "Leistung ist kein Zufall, sondern Messarbeit. Wir holen aus Ihrem Fahrzeug heraus, was sicher und sinnvoll machbar ist – mit eigenem Motorenbau, einem aktiven Motorsport-Team und Leuten, die wissen, wovon sie reden. Kein lautes Versprechen, sondern saubere Abstimmung, die im Alltag hält.",
     "Wir denken Leistung als Gesamtpaket: Software und Hardware, Motor, Abgasanlage und Fahrwerk müssen zueinander passen. Deshalb stimmen wir nicht nur eine Zahl auf dem Datenblatt ab, sondern das ganze Auto – damit mehr PS auch mehr Fahrbarkeit bedeuten und nicht nur mehr Verschleiß.",
@@ -328,7 +346,7 @@ export const performance = {
 export const lackiererei = {
   index: "06",
   kicker: "Lackiererei & Karosserie",
-  headline: "Lack und Karosserie. Alles im Haus, nichts ausgelagert.",
+  headline: "Lack und Karosserie. *Alles im Haus*, nichts ausgelagert.",
   subhead:
     "Von der Parkdelle bis zur Unfallinstandsetzung – mit eigener Lackierkabine in Berlin.",
   paragraphs: [
@@ -384,8 +402,8 @@ export const motorsport = {
 // -----------------------------------------------------------------------------
 export const kapazitaet = {
   index: "08",
-  kicker: "Kapazität & Stützpunkt",
-  headline: "15 Hebebühnen. Eine große Halle. Schnelle Termine.",
+  kicker: "Ihre Vorteile",
+  headline: "15 Hebebühnen. Eine große Halle. *Schnelle Termine*.",
   subhead: "Großer Stützpunkt in Berlin – alles unter einem Dach.",
   paragraphs: [
     "Ein Werkstattplatz ist schnell besetzt. Bei uns sind es fünfzehn. Auf 15 Hebebühnen in einer großen Halle laufen Inspektion, Karosserie, Motorenbau, Lack und Prüfstand parallel – Ihr Fahrzeug muss nicht warten, bis ein anderes fertig ist.",
@@ -482,7 +500,7 @@ export const warum = {
 export const faq = {
   index: "11",
   kicker: "Häufige Fragen",
-  headline: "Klare Antworten, bevor Sie zum Hörer greifen",
+  headline: "*Klare Antworten*, bevor Sie zum Hörer greifen",
   subhead: "Was hier nicht steht, beantworten wir am Telefon oder direkt in der Halle.",
   items: [
     {
@@ -518,13 +536,10 @@ export const faq = {
 export const kontakt = {
   index: "12",
   kicker: "Kontakt",
-  headline: "Kommen Sie vorbei. Wir reden Klartext.",
+  headline: "Kommen Sie vorbei. *Wir reden Klartext.*",
   subhead:
-    "Vom Alltagsservice bis 300+ PS – Sie erreichen uns direkt, ohne Umwege.",
-  paragraphs: [
-    "Eine Frage zum Termin, ein Geräusch, das Sie nicht zuordnen können, oder ein größeres Projekt im Kopf? Schreiben Sie uns oder rufen Sie an. Bei Max Motors landet Ihre Anfrage bei Leuten, die selbst an der Bühne stehen – keine Hotline, keine Warteschleife.",
-    "Unser Stützpunkt in Berlin hat 15 Hebebühnen, eigene Lackierkabine und eigenen Motorenbau unter einem Dach. Kurze Wege, hohe Kapazität, meist schnelle Termine. Tor auf, jeder ist willkommen.",
-  ],
+    "Ehrliche Beratung, klare Termine, saubere Arbeit – Sie erreichen uns direkt, ohne Umwege.",
+  paragraphs: [] as string[],
   formNote:
     "Sagen Sie uns kurz, um welches Fahrzeug es geht und was ansteht – je konkreter, desto schneller können wir einschätzen. Wir melden uns zeitnah zurück.",
 };
